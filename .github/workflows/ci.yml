@@ -66,11 +66,10 @@ jobs:
             **/setup.py
             **/setup.cfg
 
-      - name: Setup Node
+      - name: Setup Node (for Frappe asset building)
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: yarn
 
       - name: Install system dependencies
         run: |
