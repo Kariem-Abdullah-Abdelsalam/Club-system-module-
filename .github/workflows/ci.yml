@@ -12,32 +12,45 @@ concurrency:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
-    timeout-minutes: 40
     name: Server Tests
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+
+    env:
+      BENCH_PATH: /home/runner/frappe-bench
+      SITE_NAME: test_site
+      DB_ROOT_PASSWORD: root
+      ADMIN_PASSWORD: admin
 
     services:
       redis-cache:
         image: redis:7-alpine
         ports:
           - 13000:6379
-        options: --health-cmd="redis-cli ping" --health-interval=5s --health-timeout=2s --health-retries=10
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=5s
+          --health-timeout=2s
+          --health-retries=10
 
       redis-queue:
         image: redis:7-alpine
         ports:
           - 11000:6379
-        options: --health-cmd="redis-cli ping" --health-interval=5s --health-timeout=2s --health-retries=10
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=5s
+          --health-timeout=2s
+          --health-retries=10
 
       mariadb:
         image: mariadb:10.6
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test_db
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mariadb-admin ping --silent"
+          --health-cmd="mariadb-admin ping -proot --silent"
           --health-interval=5s
           --health-timeout=3s
           --health-retries=15
@@ -46,115 +59,83 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check for tests (non-blocking)
-        run: |
-          if grep -rn "def test" . --include="*.py" > /dev/null 2>&1; then
-            echo "Tests found"
-          else
-            echo "No tests found, skipping test run"
-            echo "SKIP_TESTS=true" >> $GITHUB_ENV
-          fi
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: pip
-          cache-dependency-path: |
-            **/requirements*.txt
-            **/pyproject.toml
-            **/setup.py
-            **/setup.cfg
 
-      - name: Setup Node (for Frappe asset building)
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
+      - name: Install Yarn
+        run: npm install --global yarn@1.22.22
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y mariadb-client libmariadb-dev pkg-config
+          sudo apt-get install -y \
+            mariadb-client \
+            libmariadb-dev \
+            pkg-config
 
-      - name: Install frappe-bench (pinned version)
+      - name: Install frappe-bench
         run: |
-          pip install --upgrade pip setuptools wheel
-          pip install "frappe-bench==5.22.0"
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install "click<8.2" frappe-bench
+          bench --version
 
       - name: Initialize bench
         run: |
-          bench init --frappe-branch version-15 \
+          bench init \
+            --frappe-branch version-15 \
             --skip-redis-config-generation \
             --skip-assets \
             --python "$(which python)" \
-            ~/frappe-bench
+            "$BENCH_PATH"
 
-      - name: Configure Redis for bench
+      - name: Configure Redis and MariaDB
         working-directory: /home/runner/frappe-bench
         run: |
-          bench setup redis
-          # Update redis cache config
-          bench set-config -g redis_cache "redis://localhost:13000"
-          # Update redis queue config
-          bench set-config -g redis_queue "redis://localhost:11000"
-          # Update redis socketio config (if needed)
-          bench set-config -g redis_socketio "redis://localhost:11000"
+          bench set-config -g redis_cache "redis://127.0.0.1:13000"
+          bench set-config -g redis_queue "redis://127.0.0.1:11000"
+          bench set-config -g redis_socketio "redis://127.0.0.1:11000"
 
-      - name: Wait for MariaDB to be ready
-        run: |
-          for i in {1..30}; do
-            if mariadb --host 127.0.0.1 --port 3306 -u root -proot -e "SELECT 1" >/dev/null 2>&1; then
-              echo "MariaDB is ready"
-              break
-            fi
-            echo "Waiting for MariaDB... ($i/30)"
-            sleep 2
-          done
+          mariadb \
+            --host 127.0.0.1 \
+            --port 3306 \
+            -u root \
+            -p"$DB_ROOT_PASSWORD" \
+            --skip-ssl \
+            -e "SET GLOBAL character_set_server = 'utf8mb4'; SET GLOBAL collation_server = 'utf8mb4_unicode_ci';"
 
-      - name: Configure MariaDB charset
-        run: |
-          mariadb --host 127.0.0.1 --port 3306 -u root -proot -e "SET GLOBAL character_set_server = 'utf8mb4'; SET GLOBAL collation_server = 'utf8mb4_unicode_ci';"
-
-      - name: Install app and setup site
+      - name: Install application
         working-directory: /home/runner/frappe-bench
+        env:
+          CI: "Yes"
         run: |
-          # Get the app from workspace
-          bench get-app club_system "$GITHUB_WORKSPACE"
-          
-          # Install base requirements first
-          bench setup requirements
-          # Then dev requirements
+          bench get-app --skip-assets club_system "$GITHUB_WORKSPACE"
           bench setup requirements --dev
-          
-          # Create site
-          bench new-site test_site \
-            --db-root-password root \
-            --admin-password admin \
+
+          bench new-site "$SITE_NAME" \
             --db-type mariadb \
             --db-host 127.0.0.1 \
-            --db-port 3306
-          
-          # Enable developer mode and allow tests
-          bench --site test_site set-config developer_mode 1
-          bench --site test_site set-config allow_tests true
-          
-          # Install app
-          bench --site test_site install-app club_system
-          
-          # CRITICAL: Run migrations to create tables
-          bench --site test_site migrate
-          
-          # Build assets
-          bench build
+            --db-port 3306 \
+            --db-root-password "$DB_ROOT_PASSWORD" \
+            --admin-password "$ADMIN_PASSWORD"
+
+          bench --site "$SITE_NAME" install-app club_system
+          bench --site "$SITE_NAME" migrate
 
       - name: Run Tests
-        if: env.SKIP_TESTS != 'true'
         working-directory: /home/runner/frappe-bench
+        env:
+          TYPE: server
         run: |
-          bench --site test_site run-tests --app club_system
-
-      - name: Run Tests (verbose on failure)
-        if: failure() && env.SKIP_TESTS != 'true'
-        working-directory: /home/runner/frappe-bench
-        run: |
-          bench --site test_site run-tests --app club_system --verbose 2>&1 | tail -100
+          bench --site "$SITE_NAME" set-config allow_tests true
+          if grep -rn "def test" ./apps/club_system --include="*.py" > /dev/null 2>&1; then
+            bench --site "$SITE_NAME" run-tests --app club_system
+          else
+            echo "No test cases detected in club_system. Skipping execution."
+          fi
