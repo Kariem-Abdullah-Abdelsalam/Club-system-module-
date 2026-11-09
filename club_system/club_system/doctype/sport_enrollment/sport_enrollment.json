@@ -1,0 +1,100 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:member_id",
+ "creation": "2026-09-23 12:21:27.628050",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "member",
+  "member_id",
+  "member_name",
+  "sport",
+  "column_break_bcxm",
+  "enrollment_date",
+  "status",
+  "fee_paid"
+ ],
+ "fields": [
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "Member",
+   "options": "Club Member"
+  },
+  {
+   "fetch_from": "member.full_name",
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sport",
+   "fieldtype": "Link",
+   "label": "Sport",
+   "options": "club sport"
+  },
+  {
+   "fieldname": "column_break_bcxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "enrollment_date",
+   "fieldtype": "Date",
+   "label": "Enrollment Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nCancelled\nCompleted"
+  },
+  {
+   "fieldname": "fee_paid",
+   "fieldtype": "Currency",
+   "label": "Fee paid"
+  },
+  {
+   "fetch_from": "member.membership_id",
+   "fieldname": "member_id",
+   "fieldtype": "Data",
+   "label": "Member Id",
+   "read_only": 1,
+   "unique": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-23 13:37:09.958182",
+ "modified_by": "Administrator",
+ "module": "Club System",
+ "name": "Sport Enrollment",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Club Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "autoname": "WARN-.#####",
+ "creation": "2026-09-23 13:47:03.612636",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "member",
+  "member_name",
+  "member_id",
+  "column_break_durv",
+  "reason_for_warning",
+  "points_deducted",
+  "warning_date",
+  "section_break_vbhf",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Member",
+   "options": "Club Member",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "member.full_name",
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "member.membership_id",
+   "fieldname": "member_id",
+   "fieldtype": "Data",
+   "label": "Member ID",
+   "read_only": 1,
+   "unique": 0
+  },
+  {
+   "fieldname": "column_break_durv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reason_for_warning",
+   "fieldtype": "Select",
+   "label": "Reason for warning",
+   "options": "Misconduct\nProperty Damage\nLate Payment\nOther",
+   "reqd": 1
+  },
+  {
+   "default": "5",
+   "fieldname": "points_deducted",
+   "fieldtype": "Int",
+   "label": "Points Deducted"
+  },
+  {
+   "default": "Today",
+   "fieldname": "warning_date",
+   "fieldtype": "Date",
+   "label": "Warning Date"
+  },
+  {
+   "fieldname": "section_break_vbhf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  }
+ ],
+ "links": [],
+ "module": "Club System",
+ "name": "club warning",
+ "naming_rule": "Expression",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:sports_name",
+ "creation": "2026-09-20 15:19:16.603473",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "sports_section",
+  "sports_name",
+  "the_coach_data",
+  "max_capacity",
+  "current_enrollment"
+ ],
+ "fields": [
+  {
+   "fieldname": "sports_section",
+   "fieldtype": "Section Break",
+   "label": "sports"
+  },
+  {
+   "fieldname": "sports_name",
+   "fieldtype": "Data",
+   "label": "sports name ",
+   "unique": 1
+  },
+  {
+   "fieldname": "the_coach_data",
+   "fieldtype": "Table",
+   "label": "The coach's data ",
+   "options": "coaches data"
+  },
+  {
+   "default": "50",
+   "fieldname": "max_capacity",
+   "fieldtype": "Int",
+   "label": "Max capacity"
+  },
+  {
+   "default": "0",
+   "fieldname": "current_enrollment",
+   "fieldtype": "Int",
+   "label": "Current Enrollment"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-23 12:40:08.135625",
+ "modified_by": "Administrator",
+ "module": "Club System",
+ "name": "club sport",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Club Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

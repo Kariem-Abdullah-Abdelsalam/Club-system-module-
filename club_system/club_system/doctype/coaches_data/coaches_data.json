@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-20 15:36:31.494328",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "coach_data_section",
+  "choachs_name",
+  "phone",
+  "national_number",
+  "education",
+  "is_he_egyptian"
+ ],
+ "fields": [
+  {
+   "fieldname": "coach_data_section",
+   "fieldtype": "Section Break",
+   "label": "coach data"
+  },
+  {
+   "fieldname": "choachs_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Choach's Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
+   "label": "Phone"
+  },
+  {
+   "fieldname": "national_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "National Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "education",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Education"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_he_egyptian",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is he Egyptian?"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-20 16:31:25.661845",
+ "modified_by": "Administrator",
+ "module": "Club System",
+ "name": "coaches data",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

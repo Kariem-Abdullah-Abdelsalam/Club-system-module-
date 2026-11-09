@@ -1,0 +1,23 @@
+{
+	"color": "#e34948",
+	"creation": "2026-11-08 10:00:00.000000",
+	"currency": "",
+	"docstatus": 0,
+	"doctype": "Number Card",
+	"dynamic_filters_json": "[]",
+	"filters_json": "[]",
+	"function": "Count",
+	"idx": 0,
+	"is_public": 1,
+	"is_standard": "Yes",
+	"label": "Total Warnings",
+	"modified": "2026-11-08 10:00:00.000000",
+	"modified_by": "Administrator",
+	"module": "Club System",
+	"name": "Total Warnings",
+	"owner": "Administrator",
+	"show_percentage_stats": 1,
+	"stats_time_interval": "Monthly",
+	"type": "Document Type",
+	"document_type": "club warning"
+}

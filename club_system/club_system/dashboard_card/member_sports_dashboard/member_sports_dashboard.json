@@ -1,0 +1,35 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"creation": "2026-11-08 10:00:00.000000",
+	"docstatus": 0,
+	"doctype": "Dashboard Card",
+	"idx": 0,
+	"is_standard": "Yes",
+	"label": "Member Sports Dashboard",
+	"modified": "2026-11-08 10:00:00.000000",
+	"modified_by": "Administrator",
+	"module": "Club System",
+	"name": "Member Sports Dashboard",
+	"owner": "Administrator",
+	"permissions": [
+		{
+			"create": 1,
+			"delete": 1,
+			"email": 1,
+			"export": 1,
+			"print": 1,
+			"read": 1,
+			"role": "System Manager",
+			"share": 1,
+			"write": 1
+		},
+		{
+			"read": 1,
+			"role": "Club Manager"
+		}
+	],
+	"script": "frappe.call({\n\tmethod: 'club_system.club_system.report.club_member_sports_report.club_member_sports_report.get_dashboard_data',\n\tcallback: function(r) {\n\t\tif (r.message) {\n\t\t\trender_dashboard_card(r.message);\n\t\t}\n\t}\n});\n\nfunction render_dashboard_card(data) {\n\tconst $card = $(frappe.render_template('member_sports_dashboard_card', data));\n\t$('.dashboard-card-member-sports-dashboard').html($card);\n}",
+	"style": ".dashboard-card-member-sports-dashboard {\n\tpadding: 16px;\n}\n\n.dashboard-card-member-sports-dashboard .stat-row {\n\tdisplay: flex;\n\tjustify-content: space-between;\n\tmargin-bottom: 8px;\n}\n\n.dashboard-card-member-sports-dashboard .stat-item {\n\tflex: 1;\n\ttext-align: center;\n\tpadding: 12px;\n\tbackground: var(--card-bg);\n\tborder-radius: 8px;\n\tmargin: 0 4px;\n\tborder: 1px solid var(--border-color);\n}\n\n.dashboard-card-member-sports-dashboard .stat-value {\n\tfont-size: 24px;\n\tfont-weight: 700;\n\tcolor: var(--text-primary);\n}\n\n.dashboard-card-member-sports-dashboard .stat-label {\n\tfont-size: 11px;\n\tcolor: var(--text-muted);\n\ttext-transform: uppercase;\n\tletter-spacing: 0.5px;\n}\n\n.dashboard-card-member-sports-dashboard .chart-preview {\n\tmargin-top: 16px;\n\theight: 200px;\n}\n\n.dashboard-card-member-sports-dashboard .progress-bar-container {\n\tmargin-top: 8px;\n}\n\n.dashboard-card-member-sports-dashboard .progress-bar {\n\theight: 6px;\n\tbackground: var(--border-color);\n\tborder-radius: 3px;\n\toverflow: hidden;\n}\n\n.dashboard-card-member-sports-dashboard .progress-fill {\n\theight: 100%;\n\tborder-radius: 3px;\n\ttransition: width 0.5s ease;\n}",
+	"template": "<div class=\"dashboard-card-member-sports-dashboard\">\n\t<div class=\"stat-row\">\n\t\t<div class=\"stat-item\" style=\"border-left: 3px solid #1baf7a;\">\n\t\t\t<div class=\"stat-value\" style=\"color: #1baf7a;\">{{ total_members }}</div>\n\t\t\t<div class=\"stat-label\">{{ __('Total Members') }}</div>\n\t\t</div>\n\t\t<div class=\"stat-item\" style=\"border-left: 3px solid #e87ba4;\">\n\t\t\t<div class=\"stat-value\" style=\"color: #e87ba4;\">{{ dependents_count }}</div>\n\t\t\t<div class=\"stat-label\">{{ __('Dependents') }}</div>\n\t\t</div>\n\t\t<div class=\"stat-item\" style=\"border-left: 3px solid #2a78d6;\">\n\t\t\t<div class=\"stat-value\" style=\"color: #2a78d6;\">{{ primary_count }}</div>\n\t\t\t<div class=\"stat-label\">{{ __('Primary Members') }}</div>\n\t\t</div>\n\t\t<div class=\"stat-item\" style=\"border-left: 3px solid #eb6834;\">\n\t\t\t<div class=\"stat-value\" style=\"color: #eb6834;\">{{ sports_count }}</div>\n\t\t\t<div class=\"stat-label\">{{ __('Active Sports') }}</div>\n\t\t</div>\n\t</div>\n\t\n\t<div class=\"progress-bar-container\">\n\t\t<label style=\"font-size: 12px; font-weight: 500;\">{{ __('Dependent Ratio') }}: {{ dependent_pct }}%</label>\n\t\t<div class=\"progress-bar\">\n\t\t\t<div class=\"progress-fill\" style=\"width: {{ dependent_pct }}%; background: linear-gradient(90deg, #e87ba4, #eb6834);\"></div>\n\t\t</div>\n\t</div>\n\t\n\t<div class=\"chart-preview\" id=\"member-sports-mini-chart\"></div>\n\t\n\t<div style=\"text-align: center; margin-top: 16px;\">\n\t\t<a href=\"/app/query-report/Club%20Member%20Sports%20Report\" class=\"btn btn-primary btn-sm\" target=\"_blank\">\n\t\t\t<i class=\"fa fa-external-link\"></i> {{ __('View Full Report') }}\n\t\t</a>\n\t</div>\n</div>"
+}

@@ -1,0 +1,249 @@
+{
+ "charts": [
+  {
+   "chart_name": "Sport Popularity",
+   "label": "Sport Popularity"
+  },
+  {
+   "chart_name": "Members per Sport",
+   "label": "Members per Sport"
+  },
+  {
+   "chart_name": "Member Mix (Primary vs Dependent)",
+   "label": "Member Mix"
+  },
+  {
+   "chart_name": "Age Distribution",
+   "label": "Age Distribution"
+  }
+ ],
+ "content": "[{\"id\":\"overview-section\",\"type\":\"card\",\"data\":{\"card_name\":\"Member Overview\",\"col\":12}},{\"id\":\"stats-row\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"active-members-card\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Members\",\"col\":3}},{\"id\":\"total-dependents-card\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Dependents\",\"col\":3}},{\"id\":\"active-enrollments-card\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Enrollments\",\"col\":3}},{\"id\":\"total-warnings-card\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Warnings\",\"col\":3}},{\"id\":\"loyalty-points-card\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Loyalty Points\",\"col\":3}},{\"id\":\"spacer-1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"charts-row-1\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Sport Popularity\",\"col\":6}},{\"id\":\"charts-row-2\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Members per Sport\",\"col\":6}},{\"id\":\"charts-row-3\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Member Mix (Primary vs Dependent)\",\"col\":6}},{\"id\":\"charts-row-4\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Age Distribution\",\"col\":6}},{\"id\":\"spacer-2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"dashboard-card\",\"type\":\"custom_block\",\"data\":{\"card_name\":\"Member Sports Dashboard\",\"col\":12}},{\"id\":\"spacer-3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"reports-section\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports & Analytics\",\"col\":4}},{\"id\":\"transactions-section\",\"type\":\"card\",\"data\":{\"card_name\":\"Daily Transactions\",\"col\":4}}]",
+ "creation": "2026-09-23 16:18:33.207501",
+ "custom_blocks": [
+  {
+   "card_name": "Member Sports Dashboard",
+   "col": 12,
+   "hidden": 0,
+   "id": "member-sports-dashboard-block",
+   "label": "Member Sports Dashboard",
+   "type": "Dashboard Card"
+  }
+ ],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "primitive-dot",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Club Management",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Members Directory",
+   "link_count": 0,
+   "link_to": "Club Member",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sports Management",
+   "link_count": 0,
+   "link_to": "club sport",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sport Enrollments",
+   "link_count": 0,
+   "link_to": "Sport Enrollment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Achievements & Points",
+   "link_count": 0,
+   "link_to": "Club Achievement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Disciplinary Warnings",
+   "link_count": 0,
+   "link_to": "club warning",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Member Status Report",
+   "link_count": 0,
+   "link_to": "Member Financial & Status",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Club Member",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Club Member Sports Report",
+   "link_count": 0,
+   "link_to": "Club Member Sports Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Club Member",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Enrollments Report",
+   "link_count": 0,
+   "link_to": "Daily Enrollments",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Sport Enrollment",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Disciplinary Report",
+   "link_count": 0,
+   "link_to": "Disciplinary Actions",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "club warning",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Daily Transactions",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sport Enrollments",
+   "link_count": 0,
+   "link_to": "Sport Enrollment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Achievements & Points",
+   "link_count": 0,
+   "link_to": "Club Achievement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Disciplinary Warnings",
+   "link_count": 0,
+   "link_to": "club warning",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": " Setup & Masters",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Members Directory",
+   "link_count": 0,
+   "link_to": "Club Member",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sports Management",
+   "link_count": 0,
+   "link_to": "club sport",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Club Settings",
+   "link_count": 0,
+   "link_to": "Club Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-11-08 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Club System",
+ "name": "Club Management",
+ "number_cards": [
+  {
+   "label": "Active Members",
+   "number_card_name": "Active Members"
+  },
+  {
+   "label": "Total Dependents",
+   "number_card_name": "Total Dependents"
+  },
+  {
+   "label": "Active Enrollments",
+   "number_card_name": "Active Enrollments"
+  },
+  {
+   "label": "Total Warnings",
+   "number_card_name": "Total Warnings"
+  },
+  {
+   "label": "Total Loyalty Points",
+   "number_card_name": "Total Loyalty Points"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 22.0,
+ "shortcuts": [],
+ "title": "Club Management"
+}

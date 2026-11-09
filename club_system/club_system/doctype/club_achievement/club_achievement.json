@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:member",
+ "creation": "2026-09-22 15:59:10.544071",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "achivements_point_section",
+  "members_loyalty_points_column",
+  "member",
+  "member_name",
+  "sport",
+  "achievement_title",
+  "column_break_mobw",
+  "achievement_date",
+  "point_earnd",
+  "status",
+  "discription",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "members_loyalty_points_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "Member",
+   "options": "Club Member",
+   "unique": 1
+  },
+  {
+   "fetch_from": "member.full_name",
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sport",
+   "fieldtype": "Link",
+   "label": "Sport",
+   "options": "club sport"
+  },
+  {
+   "fieldname": "achievement_title",
+   "fieldtype": "Data",
+   "label": "Achievement Title"
+  },
+  {
+   "fieldname": "column_break_mobw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "achievement_date",
+   "fieldtype": "Date",
+   "label": "Achievement Date"
+  },
+  {
+   "default": "10",
+   "fieldname": "point_earnd",
+   "fieldtype": "Int",
+   "label": "Point Earnd"
+  },
+  {
+   "default": "approved",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "pending\napproved\nrejected"
+  },
+  {
+   "fieldname": "discription",
+   "fieldtype": "Small Text",
+   "label": "Discription"
+  },
+  {
+   "fieldname": "achivements_point_section",
+   "fieldtype": "Section Break",
+   "label": "Achivements point"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Club Achievement",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-22 17:38:11.255089",
+ "modified_by": "Administrator",
+ "module": "Club System",
+ "name": "Club Achievement",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

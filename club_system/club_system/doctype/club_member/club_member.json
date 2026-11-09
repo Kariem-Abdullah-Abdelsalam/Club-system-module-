@@ -1,0 +1,176 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:membership_id",
+ "creation": "2026-09-21 10:46:41.181757",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "infromation_section",
+  "information_column",
+  "full_name",
+  "date_of_birth",
+  "member_age",
+  "national_number",
+  "membership_information_column",
+  "membership_id",
+  "membership_type",
+  "membership_status",
+  "expiry_date",
+  "is_dependent",
+  "primary_member",
+  "days_left",
+  "points_and_warnings_section",
+  "loyalty_points",
+  "warning_count",
+  "section_break_bagg",
+  "club_family_member"
+ ],
+ "fields": [
+  {
+   "fieldname": "infromation_section",
+   "fieldtype": "Section Break",
+   "label": "Information"
+  },
+  {
+   "fieldname": "information_column",
+   "fieldtype": "Column Break",
+   "label": "Member Information"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "member_age",
+   "fieldtype": "Int",
+   "label": "Member Age",
+   "read_only": 1
+  },
+  {
+   "fieldname": "national_number",
+   "fieldtype": "Data",
+   "label": "National Number"
+  },
+  {
+   "fieldname": "membership_information_column",
+   "fieldtype": "Column Break",
+   "label": "Membership Information"
+  },
+  {
+   "fieldname": "membership_id",
+   "fieldtype": "Data",
+   "label": "Membership ID",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "membership_type",
+   "fieldtype": "Select",
+   "label": "Membership Type",
+   "options": "Bronze\nSilver\nGold"
+  },
+  {
+   "default": "Active",
+   "fieldname": "membership_status",
+   "fieldtype": "Select",
+   "label": "Membership Status",
+   "options": "Active\nInactive\nSuspended\nExpired"
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_dependent",
+   "fieldtype": "Check",
+   "label": "Is Dependent"
+  },
+  {
+   "depends_on": "eval:doc.is_dependent == 1",
+   "fieldname": "primary_member",
+   "fieldtype": "Link",
+   "label": "Primary Member",
+   "mandatory_depends_on": "eval:doc.is_dependent == 1",
+   "options": "Club Member"
+  },
+  {
+   "fieldname": "days_left",
+   "fieldtype": "Int",
+   "label": "Days Left",
+   "read_only": 1
+  },
+  {
+   "fieldname": "points_and_warnings_section",
+   "fieldtype": "Section Break",
+   "label": "Points and Warnings"
+  },
+  {
+   "default": "0",
+   "fieldname": "loyalty_points",
+   "fieldtype": "Int",
+   "label": "Loyalty Points",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "warning_count",
+   "fieldtype": "Int",
+   "label": "Warning Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_bagg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "club_family_member",
+   "fieldtype": "Table",
+   "label": "Club Family Member",
+   "options": "Family Member"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-21 14:15:00.000000",
+ "modified_by": "Administrator",
+ "module": "Club System",
+ "name": "Club Member",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Club Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
