@@ -33,6 +33,7 @@ jobs:
         image: mariadb:10.6
         env:
           MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
         ports:
           - 3306:3306
         options: >-
@@ -65,10 +66,11 @@ jobs:
             **/setup.py
             **/setup.cfg
 
-      - name: Setup Node (for Frappe asset building)
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: yarn
 
       - name: Install system dependencies
         run: |
@@ -92,8 +94,11 @@ jobs:
         working-directory: /home/runner/frappe-bench
         run: |
           bench setup redis
+          # Update redis cache config
           bench set-config -g redis_cache "redis://localhost:13000"
+          # Update redis queue config
           bench set-config -g redis_queue "redis://localhost:11000"
+          # Update redis socketio config (if needed)
           bench set-config -g redis_socketio "redis://localhost:11000"
 
       - name: Wait for MariaDB to be ready
@@ -114,19 +119,33 @@ jobs:
       - name: Install app and setup site
         working-directory: /home/runner/frappe-bench
         run: |
+          # Get the app from workspace
           bench get-app club_system "$GITHUB_WORKSPACE"
+          
+          # Install base requirements first
           bench setup requirements
+          # Then dev requirements
           bench setup requirements --dev
+          
+          # Create site
           bench new-site test_site \
             --db-root-password root \
             --admin-password admin \
             --db-type mariadb \
             --db-host 127.0.0.1 \
             --db-port 3306
+          
+          # Enable developer mode and allow tests
           bench --site test_site set-config developer_mode 1
           bench --site test_site set-config allow_tests true
+          
+          # Install app
           bench --site test_site install-app club_system
+          
+          # CRITICAL: Run migrations to create tables
           bench --site test_site migrate
+          
+          # Build assets
           bench build
 
       - name: Run Tests
